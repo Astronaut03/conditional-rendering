@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useState } from 'react';
+// import './App.css';
+// import User from './components/User/User';
 
-function App() {
+
+// function App() {
+//   const [familiar, setFamiliar] = useState(true);
+
+//   return (
+//     <div className="App">
+//       <h2>Is Familiar:</h2>
+//       <button onClick= {() => setFamiliar(!familiar)}>Toggle Friend</button>
+//       <User familiar = {familiar}></User>
+//     </div>
+//   );
+// }
+
+// export default App;
+import React from 'react';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import FriendDetail from './components/FriendDetail/FriendDetail';
+import Home from './components/Home/Home';
+import NoMatch from './components/NoMatch/NoMatch';
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/home">
+        <Home></Home>
+        </Route>
+        <Route path="/friend/:friendID">
+          <FriendDetail></FriendDetail>
+        </Route>
+        <Route exact path="/">
+          <Home></Home>
+        </Route>
+        <Route path="*">
+          <NoMatch></NoMatch>
+        </Route>
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
